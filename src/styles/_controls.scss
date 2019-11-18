@@ -1,0 +1,34 @@
+.controls {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-gap: .5em;
+
+    label {
+        margin-right: .5em;
+    }
+}
+
+.control--big {
+    grid-column-end: span 2;
+}
+
+.control__button {
+    background-color: transparent;
+    border: 2px solid $blue;
+    color: inherit;
+    margin-right: 8px;
+    overflow: hidden;
+    padding: 0;
+    text-indent: 100%;
+    width: 24px;
+    height: 24px;
+
+    &--landscape {
+        height: 24px / 3 * 4;
+    }
+
+    &--portrait {
+        width: 24px / 3 * 4;
+    }
+}

@@ -1,0 +1,12 @@
+* {
+    box-sizing: border-box;
+    letter-spacing: $letter-spacing-s;
+}
+
+body {
+    font-family: $font-family-base;
+    line-height: $line-height-base;
+    margin: 0;
+    min-width: 320px;
+    padding: 20px;
+}

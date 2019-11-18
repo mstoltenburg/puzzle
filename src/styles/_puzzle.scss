@@ -1,0 +1,52 @@
+:root {
+    --puzzle-rows: 3;
+    --puzzle-columns: 3;
+}
+
+.puzzle__canvas {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.puzzle__pieces {
+    display: grid;
+    grid-template-columns: repeat(var(--puzzle-columns), 1fr);
+    grid-template-rows: repeat(var(--puzzle-rows), 1fr);
+}
+
+.puzzle__piece {
+    // reset <button> styles
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    padding: 0;
+
+    position: relative;
+    z-index: 1;
+
+    &--active {
+        z-index: 2;
+        .puzzle__border {
+            box-shadow: 0 0 0 1px lime, inset 0 0 0 1px lime;
+        }
+    }
+
+    &--solved {
+        z-index: 0;
+        .puzzle__border {
+            box-shadow: none;
+        }
+    }
+}
+
+$border-color: $blue;
+
+.puzzle__border {
+    box-shadow: 0 0 0 1px $border-color, inset 0 0 0 1px $border-color;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}

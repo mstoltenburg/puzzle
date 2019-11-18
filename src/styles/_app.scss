@@ -1,0 +1,7 @@
+.app {
+    align-items: center;
+    display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr min-content;
+    grid-gap: 20px;
+}
