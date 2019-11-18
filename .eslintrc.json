@@ -1,0 +1,59 @@
+{
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+        "browser": 1,
+        "jest": 1
+    },
+    "plugins": ["react-hooks"],
+    "rules": {
+        "no-use-before-define": 0,
+        "max-len": ["error", 80, 2, {
+            "ignoreUrls": true,
+            "ignoreComments": false,
+            "ignoreRegExpLiterals": true,
+            "ignoreStrings": true,
+            "ignoreTemplateLiterals": true
+        }],
+        "indent": [
+            "error",
+            4,
+            { "SwitchCase": 1 }
+        ],
+        "import/no-extraneous-dependencies": 0,
+        "import/no-unresolved": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/label-has-associated-control": 0,
+        "jsx-a11y/label-has-for": ["error", {
+            "components": [],
+            "required": {
+                "some": [ "nesting", "id" ]
+            },
+            "allowChildren": false
+        }],
+        "object-curly-newline": ["error", {
+            "multiline": true,
+            "consistent": true
+        }],
+        "react-hooks/exhaustive-deps": "error",
+        "react-hooks/rules-of-hooks": "error",
+        "react/destructuring-assignment": ["off", "always"],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-props-no-spreading": 0,
+        "react/sort-comp": [2, {
+            "order": [
+                "static-variables",
+                "static-methods",
+                "lifecycle",
+                "render",
+                "everything-else"
+            ]
+        }],
+        "react/state-in-constructor": 0,
+        "react/static-property-placement": ["error", "static public field"]
+    },
+    "globals": {
+        "IS_PRODUCTION": true
+    }
+}

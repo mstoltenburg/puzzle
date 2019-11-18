@@ -1,0 +1,44 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "modules": false,
+                "debug": false
+            }
+        ],
+        "@babel/preset-react"
+    ],
+    "plugins": [
+        ["babel-plugin-module-resolver", {
+            "alias": {
+                "app": "./src"
+            }
+        }],
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-proposal-export-default-from",
+        "@babel/plugin-proposal-export-namespace-from",
+        "@babel/plugin-proposal-class-properties",
+        [ "@babel/plugin-transform-runtime", { "useESModules": true } ]
+    ],
+    "env": {
+        "test": {
+            "presets": [
+                "@babel/preset-env",
+                "@babel/preset-react"
+            ],
+            "plugins": [
+                ["babel-plugin-module-resolver", {
+                    "alias": {
+                        "app": "./src"
+                    }
+                }],
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/plugin-proposal-export-default-from",
+                "@babel/plugin-proposal-export-namespace-from",
+                "@babel/plugin-proposal-class-properties",
+                [ "@babel/plugin-transform-runtime" ]
+            ]
+        }
+    }
+}
