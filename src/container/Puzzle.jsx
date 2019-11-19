@@ -41,6 +41,14 @@ const Puzzle = ({ puzzle }) => {
     const { image, rows, columns } = puzzle;
 
     useEffect(() => {
+        document.documentElement.style.setProperty('--puzzle-rows', rows);
+    }, [rows]);
+
+    useEffect(() => {
+        document.documentElement.style.setProperty('--puzzle-columns', columns);
+    }, [columns]);
+
+    useEffect(() => {
         if (image) {
             dispatch({ type: 'init', pieces: rows * columns });
         }

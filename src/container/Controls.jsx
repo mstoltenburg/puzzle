@@ -18,12 +18,10 @@ const Controls = ({ puzzle, updatePuzzle, setSource }) => {
     const changeRows = ({ target }) => {
         const value = parseInt(target.value, 10);
         updatePuzzle({ type: 'rows', rows: value });
-        document.documentElement.style.setProperty('--puzzle-rows', value);
     };
     const changeColumns = ({ target }) => {
         const value = parseInt(target.value, 10);
         updatePuzzle({ type: 'columns', columns: value });
-        document.documentElement.style.setProperty('--puzzle-columns', value);
     };
     const changeFormat = ({ target }) => {
         updatePuzzle({ type: 'format', format: target.value });
