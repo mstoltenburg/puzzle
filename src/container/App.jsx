@@ -42,9 +42,11 @@ function reducer(state, action) {
                         width: 540,
                         height: 720,
                         ratio: 540 / 720,
-                        // rows: Math.max(state.rows, state.columns),
-                        // columns: Math.min(state.rows, state.columns),
                     };
+                    if (state.format === 'landscape') {
+                        format.rows = state.columns;
+                        format.columns = state.rows;
+                    }
                     break;
                 case 'square':
                     format = {
@@ -52,8 +54,6 @@ function reducer(state, action) {
                         width: 540,
                         height: 540,
                         ratio: 1,
-                        // rows: Math.min(state.rows, state.columns),
-                        // columns: Math.min(state.rows, state.columns),
                     };
                     break;
                 default:
@@ -62,9 +62,11 @@ function reducer(state, action) {
                         width: 720,
                         height: 540,
                         ratio: 720 / 540,
-                        // rows: Math.min(state.rows, state.columns),
-                        // columns: Math.max(state.rows, state.columns),
                     };
+                    if (state.format === 'portrait') {
+                        format.rows = state.columns;
+                        format.columns = state.rows;
+                    }
             }
             return {
                 ...state,
