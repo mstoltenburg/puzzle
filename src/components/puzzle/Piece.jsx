@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { getImage } from 'app/utilities';
 import { PUZZLE } from 'app/shapes';
 
-const Piece = ({ piece, active, solved, puzzle, dispatch }) => {
+const Piece = ({ piece, active, solved, puzzle, updatePieces }) => {
     const canvas = useRef(null);
     const pieceWidth = Math.round(puzzle.width / puzzle.columns);
     const pieceHeight = Math.round(puzzle.height / puzzle.rows);
@@ -14,7 +14,7 @@ const Piece = ({ piece, active, solved, puzzle, dispatch }) => {
         'puzzle__piece--solved': solved,
     });
     const togglePiece = ({ currentTarget }) => {
-        dispatch({ type: 'toggle', value: Number(currentTarget.value) });
+        updatePieces({ type: 'toggle', value: Number(currentTarget.value) });
     };
 
     useEffect(() => {
@@ -49,7 +49,7 @@ Piece.propTypes = {
     active: PropTypes.bool.isRequired,
     solved: PropTypes.bool.isRequired,
     puzzle: PropTypes.shape(PUZZLE).isRequired,
-    dispatch: PropTypes.func.isRequired,
+    updatePieces: PropTypes.func.isRequired,
 };
 
 export default memo(Piece);

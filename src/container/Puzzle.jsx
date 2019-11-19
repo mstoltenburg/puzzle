@@ -8,17 +8,17 @@ import { PUZZLE } from 'app/shapes';
 
 const initialState = {
     active: undefined,
-    selection: [],
+    list: [],
 };
 
 function reducer(state, action) {
     switch (action.type) {
         case 'toggle': {
-            const { active, selection } = state;
+            const { active, list } = state;
             if (active !== undefined) {
                 return {
                     active: undefined,
-                    selection: swapSelection(selection, active, action.value),
+                    list: swapSelection(list, active, action.value),
                 };
             }
             return {
@@ -29,7 +29,7 @@ function reducer(state, action) {
         case 'init':
             return {
                 active: undefined,
-                selection: getSelection(action.pieces),
+                list: getSelection(action.pieces),
             };
         default:
             throw new Error();
@@ -37,7 +37,7 @@ function reducer(state, action) {
 }
 
 const Puzzle = ({ puzzle }) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [pieces, updatePieces] = useReducer(reducer, initialState);
     const { image, rows, columns } = puzzle;
 
     useEffect(() => {
@@ -50,20 +50,20 @@ const Puzzle = ({ puzzle }) => {
 
     useEffect(() => {
         if (image) {
-            dispatch({ type: 'init', pieces: rows * columns });
+            updatePieces({ type: 'init', pieces: rows * columns });
         }
     }, [rows, columns, image]);
 
     return (
         <div className="puzzle__pieces">
-            {state.selection.map((value, index) => (
+            {pieces.list.map((value, index) => (
                 <Piece
                     key={`p-${value}`}
                     piece={value}
-                    active={value === state.active}
+                    active={value === pieces.active}
                     solved={value === index}
                     puzzle={puzzle}
-                    dispatch={dispatch}
+                    updatePieces={updatePieces}
                 />
             ))}
         </div>
