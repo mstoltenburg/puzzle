@@ -25,10 +25,10 @@
     height: 24px;
 
     &[value="landscape"] {
-        height: 24px / 3 * 4;
+        width: 24px / 3 * 4;
     }
 
     &[value="portrait"] {
-        width: 24px / 3 * 4;
+        height: 24px / 3 * 4;
     }
 }
