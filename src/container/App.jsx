@@ -15,7 +15,6 @@ const initialState = {
 
 function reducer(state, action) {
     let format;
-    window.console.debug(state, action);
     switch (action.type) {
         case 'image': {
             return {
