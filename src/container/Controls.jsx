@@ -14,12 +14,10 @@ const Controls = ({ rows, columns, updatePuzzle, setSource }) => {
         setSource(value);
     };
     const changeRows = ({ target }) => {
-        const value = parseInt(target.value, 10);
-        updatePuzzle({ type: 'rows', rows: value });
+        updatePuzzle({ type: 'rows', rows: target.value });
     };
     const changeColumns = ({ target }) => {
-        const value = parseInt(target.value, 10);
-        updatePuzzle({ type: 'columns', columns: value });
+        updatePuzzle({ type: 'columns', columns: target.value });
     };
     const changeFormat = ({ target }) => {
         updatePuzzle({ type: 'format', format: target.value });
