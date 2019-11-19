@@ -6,7 +6,7 @@ import { Puzzle, Controls } from 'app/container';
 const initialState = {
     image: undefined,
     rows: 3,
-    columns: 3,
+    columns: 4,
     format: 'landscape',
     width: 720,
     height: 540,
