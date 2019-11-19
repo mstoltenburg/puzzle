@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { memo, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -6,7 +6,7 @@ import { CANVAS_HEIGHT, CANVAS_WIDTH } from 'app/config';
 import { IMAGE } from 'app/shapes';
 
 const Piece = ({
-    image, piece, active, solved, rows, columns, togglePiece,
+    image, piece, active, solved, rows, columns, dispatch,
 }) => {
     const canvas = useRef(null);
     const pieceWidth = Math.round(CANVAS_WIDTH / columns);
@@ -15,6 +15,9 @@ const Piece = ({
         'puzzle__piece--active': active,
         'puzzle__piece--solved': solved,
     });
+    const togglePiece = ({ currentTarget }) => {
+        dispatch({ type: 'toggle', value: Number(currentTarget.value) });
+    };
 
     useEffect(() => {
         if (image) {
@@ -49,11 +52,11 @@ Piece.propTypes = {
     solved: PropTypes.bool.isRequired,
     rows: PropTypes.number.isRequired,
     columns: PropTypes.number.isRequired,
-    togglePiece: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
 
 Piece.defaultProps = {
     image: undefined,
 };
 
-export default Piece;
+export default memo(Piece);
