@@ -1,26 +1,23 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from 'app/config';
-import { IMAGE } from 'app/shapes';
+import imageSrc from 'app/images/IMG_0356.jpeg';
 
-const Preview = ({ image }) => {
-    const width = CANVAS_WIDTH / 3;
-    const height = CANVAS_HEIGHT / 3;
+const Preview = forwardRef(({ format, updatePuzzle }, ref) => {
+    const updateImage = ({ target }) => {
+        updatePuzzle({ type: 'image', image: target });
+    };
 
-    return !image ? null : (
-        <div className="preview">
-            <img width={width} height={height} src={image.img.src} alt="Vorschau" />
+    return (
+        <div className={`preview preview--${format}`}>
+            <img className="preview__image" src={imageSrc} ref={ref} onLoad={updateImage} alt="Vorschau" />
         </div>
     );
-};
+});
 
 Preview.propTypes = {
-    image: PropTypes.shape(IMAGE),
-};
-
-Preview.defaultProps = {
-    image: undefined,
+    format: PropTypes.string.isRequired,
+    updatePuzzle: PropTypes.func.isRequired,
 };
 
 export default Preview;

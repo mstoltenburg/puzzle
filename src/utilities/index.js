@@ -1,5 +1,3 @@
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from 'app/config';
-
 function valueEqualsIndex(value, index) {
     return value === index;
 }
@@ -56,29 +54,27 @@ export function swapSelection(selection, origin, target) {
     return array;
 }
 
-export function getImage(img) {
-    const { width, height } = img;
-    const imageRatio = width / height;
-    const canvasRatio = CANVAS_WIDTH / CANVAS_HEIGHT;
+export function getImage(image, canvasRatio) {
+    const { naturalWidth, naturalHeight } = image;
+    const imageRatio = naturalWidth / naturalHeight;
 
-    let sx = 0;
-    let sy = 0;
-    let sWidth = width;
-    let sHeight = height;
+    let offsetX = 0;
+    let offsetY = 0;
+    let width = naturalWidth;
+    let height = naturalHeight;
 
     if (imageRatio > canvasRatio) {
-        sWidth = height * canvasRatio;
-        sx = Math.round((width - sWidth) / 2);
+        width = naturalHeight * canvasRatio;
+        offsetX = Math.round((naturalWidth - width) / 2);
     } else if (canvasRatio > imageRatio) {
-        sHeight = width / canvasRatio;
-        sy = Math.round((height - sHeight) / 2);
+        height = naturalWidth / canvasRatio;
+        offsetY = Math.round((naturalHeight - height) / 2);
     }
 
     return {
-        img,
-        offsetX: sx,
-        offsetY: sy,
-        width: sWidth,
-        height: sHeight,
+        width,
+        height,
+        offsetX,
+        offsetY,
     };
 }

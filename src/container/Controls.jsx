@@ -26,7 +26,7 @@ const Controls = ({ puzzle, updatePuzzle, setSource }) => {
         document.documentElement.style.setProperty('--puzzle-columns', value);
     };
     const changeFormat = ({ target }) => {
-        updatePuzzle({ type: 'ratio', format: target.value });
+        updatePuzzle({ type: 'format', format: target.value });
     };
 
     return (
@@ -43,13 +43,13 @@ const Controls = ({ puzzle, updatePuzzle, setSource }) => {
             <label htmlFor="format">Format</label>
             <div className="control--big">
                 <button name="format" value="landscape" type="button" className="control__button" onClick={changeFormat}>
-                    Hochformat
+                    Querformat
                 </button>
                 <button name="format" value="square" type="button" className="control__button" onClick={changeFormat}>
                     Quadrat
                 </button>
                 <button name="format" value="portrait" type="button" className="control__button" onClick={changeFormat}>
-                    Porträt
+                    Hochformat
                 </button>
             </div>
             <label htmlFor="rows">Reihen</label>

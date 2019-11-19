@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Piece } from 'app/components/puzzle';
 import { getSelection, swapSelection } from 'app/utilities';
-import { IMAGE } from 'app/shapes';
+import { PUZZLE } from 'app/shapes';
+
 
 const initialState = {
     active: undefined,
@@ -35,8 +36,9 @@ function reducer(state, action) {
     }
 }
 
-const Puzzle = ({ rows, columns, image }) => {
+const Puzzle = ({ puzzle }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
+    const { image, rows, columns } = puzzle;
 
     useEffect(() => {
         if (image) {
@@ -52,9 +54,7 @@ const Puzzle = ({ rows, columns, image }) => {
                     piece={value}
                     active={value === state.active}
                     solved={value === index}
-                    rows={rows}
-                    columns={columns}
-                    image={image}
+                    puzzle={puzzle}
                     dispatch={dispatch}
                 />
             ))}
@@ -63,13 +63,7 @@ const Puzzle = ({ rows, columns, image }) => {
 };
 
 Puzzle.propTypes = {
-    rows: PropTypes.number.isRequired,
-    columns: PropTypes.number.isRequired,
-    image: PropTypes.shape(IMAGE),
-};
-
-Puzzle.defaultProps = {
-    image: undefined,
+    puzzle: PropTypes.shape(PUZZLE).isRequired,
 };
 
 export default Puzzle;

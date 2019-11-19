@@ -1,11 +1,10 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer, useRef } from 'react';
 
 import { Preview } from 'app/components/puzzle';
 import { Puzzle, Controls } from 'app/container';
-import { getImage } from 'app/utilities';
-import imageSrc from 'app/images/IMG_0356.jpeg';
 
 const initialState = {
+    image: undefined,
     rows: 3,
     columns: 3,
     format: 'landscape',
@@ -16,7 +15,14 @@ const initialState = {
 
 function reducer(state, action) {
     let format;
+    window.console.debug(state, action);
     switch (action.type) {
+        case 'image': {
+            return {
+                ...state,
+                image: action.image,
+            };
+        }
         case 'rows': {
             return {
                 ...state,
@@ -37,14 +43,18 @@ function reducer(state, action) {
                         width: 540,
                         height: 720,
                         ratio: 540 / 720,
+                        // rows: Math.max(state.rows, state.columns),
+                        // columns: Math.min(state.rows, state.columns),
                     };
                     break;
                 case 'square':
                     format = {
                         format: action.format,
                         width: 540,
-                        height: 720,
-                        ratio: 540 / 720,
+                        height: 540,
+                        ratio: 1,
+                        // rows: Math.min(state.rows, state.columns),
+                        // columns: Math.min(state.rows, state.columns),
                     };
                     break;
                 default:
@@ -53,6 +63,8 @@ function reducer(state, action) {
                         width: 720,
                         height: 540,
                         ratio: 720 / 540,
+                        // rows: Math.min(state.rows, state.columns),
+                        // columns: Math.max(state.rows, state.columns),
                     };
             }
             return {
@@ -66,27 +78,23 @@ function reducer(state, action) {
 
 const App = () => {
     const [puzzle, updatePuzzle] = useReducer(reducer, initialState);
-    const [image, setImage] = useState(undefined);
-
-    useEffect(() => {
-        const img = new Image();
-        img.addEventListener('load', () => {
-            setImage(getImage(img));
-        }, false);
-        img.src = imageSrc;
-    }, []);
+    const motif = useRef(null);
 
     const setSource = (src) => {
-        if (image) {
-            image.img.src = src;
+        if (motif.current) {
+            motif.current.src = src;
         }
     };
 
     return (
         <main className="app">
-            <Puzzle rows={puzzle.rows} columns={puzzle.columns} image={image} />
-            <aside>
-                <Preview image={image} />
+            <Puzzle puzzle={puzzle} />
+            <aside className="sidebar">
+                <Preview
+                    format={puzzle.format}
+                    updatePuzzle={updatePuzzle}
+                    ref={motif}
+                />
                 <Controls
                     puzzle={puzzle}
                     updatePuzzle={updatePuzzle}

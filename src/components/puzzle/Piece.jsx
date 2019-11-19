@@ -2,15 +2,13 @@ import React, { memo, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from 'app/config';
-import { IMAGE } from 'app/shapes';
+import { getImage } from 'app/utilities';
+import { PUZZLE } from 'app/shapes';
 
-const Piece = ({
-    image, piece, active, solved, rows, columns, dispatch,
-}) => {
+const Piece = ({ piece, active, solved, puzzle, dispatch }) => {
     const canvas = useRef(null);
-    const pieceWidth = Math.round(CANVAS_WIDTH / columns);
-    const pieceHeight = Math.round(CANVAS_HEIGHT / rows);
+    const pieceWidth = Math.round(puzzle.width / puzzle.columns);
+    const pieceHeight = Math.round(puzzle.height / puzzle.rows);
     const style = classNames('puzzle__piece', {
         'puzzle__piece--active': active,
         'puzzle__piece--solved': solved,
@@ -20,8 +18,9 @@ const Piece = ({
     };
 
     useEffect(() => {
+        const { image, rows, columns, ratio } = puzzle;
         if (image) {
-            let { width, height, offsetX, offsetY } = image;
+            let { width, height, offsetX, offsetY } = getImage(image, ratio);
 
             width = Math.round(width / columns);
             height = Math.round(height / rows);
@@ -31,11 +30,11 @@ const Piece = ({
 
             const ctx = canvas.current.getContext('2d', { alpha: false });
             ctx.drawImage(
-                image.img, offsetX, offsetY, width, height,
+                image, offsetX, offsetY, width, height,
                 0, 0, pieceWidth, pieceHeight,
             );
         }
-    }, [image, rows, columns, piece, pieceWidth, pieceHeight]);
+    }, [puzzle, piece, pieceWidth, pieceHeight]);
 
     return (
         <button type="button" className={style} value={piece} onClick={togglePiece} disabled={solved || active}>
@@ -46,17 +45,11 @@ const Piece = ({
 };
 
 Piece.propTypes = {
-    image: PropTypes.shape(IMAGE),
     piece: PropTypes.number.isRequired,
     active: PropTypes.bool.isRequired,
     solved: PropTypes.bool.isRequired,
-    rows: PropTypes.number.isRequired,
-    columns: PropTypes.number.isRequired,
+    puzzle: PropTypes.shape(PUZZLE).isRequired,
     dispatch: PropTypes.func.isRequired,
-};
-
-Piece.defaultProps = {
-    image: undefined,
 };
 
 export default memo(Piece);
