@@ -96,7 +96,8 @@ const App = () => {
                     ref={motif}
                 />
                 <Controls
-                    puzzle={puzzle}
+                    rows={puzzle.rows}
+                    columns={puzzle.columns}
                     updatePuzzle={updatePuzzle}
                     setSource={setSource}
                 />

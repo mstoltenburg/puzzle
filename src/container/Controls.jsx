@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PUZZLE } from 'app/shapes';
-
 import irma from 'app/images/IMG_0356.jpeg';
 import koali from 'app/images/DSC00577.jpeg';
 import koali2 from 'app/images/DSC00578.jpeg';
@@ -10,7 +8,7 @@ import koali3 from 'app/images/DSC00572.jpeg';
 import koali4 from 'app/images/DSC00563.jpeg';
 import pferd from 'app/images/DSC00579.jpeg';
 
-const Controls = ({ puzzle, updatePuzzle, setSource }) => {
+const Controls = ({ rows, columns, updatePuzzle, setSource }) => {
     const changeImage = ({ target }) => {
         const { value } = target;
         setSource(value);
@@ -51,17 +49,18 @@ const Controls = ({ puzzle, updatePuzzle, setSource }) => {
                 </button>
             </div>
             <label htmlFor="rows">Reihen</label>
-            <input id="rows" type="range" onChange={changeRows} min="1" max="6" value={puzzle.rows} />
-            <span className="control__value">{puzzle.rows}</span>
+            <input id="rows" type="range" onChange={changeRows} min="1" max="6" value={rows} />
+            <span className="control__value">{rows}</span>
             <label htmlFor="columns">Spalten</label>
-            <input id="columns" type="range" onChange={changeColumns} min="1" max="6" value={puzzle.columns} />
-            <span className="control__value">{puzzle.columns}</span>
+            <input id="columns" type="range" onChange={changeColumns} min="1" max="6" value={columns} />
+            <span className="control__value">{columns}</span>
         </div>
     );
 };
 
 Controls.propTypes = {
-    puzzle: PropTypes.shape(PUZZLE).isRequired,
+    rows: PropTypes.number.isRequired,
+    columns: PropTypes.number.isRequired,
     updatePuzzle: PropTypes.func.isRequired,
     setSource: PropTypes.func.isRequired,
 };
