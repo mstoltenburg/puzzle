@@ -2,10 +2,9 @@ import React, { memo, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { getImage } from 'app/utilities';
-import { PUZZLE } from 'app/shapes';
+import { DIMENSIONS, PUZZLE } from 'app/shapes';
 
-const Piece = ({ piece, active, solved, puzzle, updatePieces }) => {
+const Piece = ({ piece, active, solved, puzzle, dimensions, updatePieces }) => {
     const canvas = useRef(null);
     const pieceWidth = Math.round(puzzle.width / puzzle.columns);
     const pieceHeight = Math.round(puzzle.height / puzzle.rows);
@@ -18,9 +17,9 @@ const Piece = ({ piece, active, solved, puzzle, updatePieces }) => {
     };
 
     useEffect(() => {
-        const { image, rows, columns, ratio } = puzzle;
+        const { image, rows, columns } = puzzle;
         if (image) {
-            let { width, height, offsetX, offsetY } = getImage(image, ratio);
+            let { width, height, offsetX, offsetY } = dimensions;
 
             width = Math.round(width / columns);
             height = Math.round(height / rows);
@@ -34,7 +33,7 @@ const Piece = ({ piece, active, solved, puzzle, updatePieces }) => {
                 0, 0, pieceWidth, pieceHeight,
             );
         }
-    }, [puzzle, piece, pieceWidth, pieceHeight]);
+    }, [puzzle, piece, pieceWidth, pieceHeight, dimensions]);
 
     return (
         <button type="button" className={style} value={piece} onClick={togglePiece} disabled={solved || active}>
@@ -49,6 +48,7 @@ Piece.propTypes = {
     active: PropTypes.bool.isRequired,
     solved: PropTypes.bool.isRequired,
     puzzle: PropTypes.shape(PUZZLE).isRequired,
+    dimensions: PropTypes.shape(DIMENSIONS).isRequired,
     updatePieces: PropTypes.func.isRequired,
 };
 

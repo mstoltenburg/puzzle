@@ -54,8 +54,7 @@ export function swapSelection(selection, origin, target) {
     return array;
 }
 
-export function getImage(image, canvasRatio) {
-    const { naturalWidth, naturalHeight } = image;
+export function getImage(naturalWidth, naturalHeight, canvasRatio) {
     const imageRatio = naturalWidth / naturalHeight;
 
     let offsetX = 0;
@@ -64,10 +63,10 @@ export function getImage(image, canvasRatio) {
     let height = naturalHeight;
 
     if (imageRatio > canvasRatio) {
-        width = naturalHeight * canvasRatio;
+        width = Math.round(naturalHeight * canvasRatio);
         offsetX = Math.round((naturalWidth - width) / 2);
     } else if (canvasRatio > imageRatio) {
-        height = naturalWidth / canvasRatio;
+        height = Math.round(naturalWidth / canvasRatio);
         offsetY = Math.round((naturalHeight - height) / 2);
     }
 

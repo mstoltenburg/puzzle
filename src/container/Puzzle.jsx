@@ -1,8 +1,8 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Piece } from 'app/components/puzzle';
-import { getSelection, swapSelection } from 'app/utilities';
+import { getSelection, swapSelection, getImage } from 'app/utilities';
 import { PUZZLE } from 'app/shapes';
 
 
@@ -38,7 +38,9 @@ function reducer(state, action) {
 
 const Puzzle = ({ puzzle }) => {
     const [pieces, updatePieces] = useReducer(reducer, initialState);
-    const { image, rows, columns } = puzzle;
+    const [dimensions, setDimensions] = useState({});
+    const { image, rows, columns, ratio } = puzzle;
+    const { naturalWidth, naturalHeight, src } = image || {};
 
     useEffect(() => {
         document.documentElement.style.setProperty('--puzzle-rows', rows);
@@ -49,10 +51,16 @@ const Puzzle = ({ puzzle }) => {
     }, [columns]);
 
     useEffect(() => {
-        if (image) {
+        if (naturalWidth && naturalHeight) {
+            setDimensions(getImage(naturalWidth, naturalHeight, ratio));
+        }
+    }, [naturalWidth, naturalHeight, ratio]);
+
+    useEffect(() => {
+        if (src) {
             updatePieces({ type: 'init', pieces: rows * columns });
         }
-    }, [rows, columns, image]);
+    }, [rows, columns, src]);
 
     return (
         <div className="puzzle__pieces">
@@ -63,6 +71,7 @@ const Puzzle = ({ puzzle }) => {
                     active={value === pieces.active}
                     solved={value === index}
                     puzzle={puzzle}
+                    dimensions={dimensions}
                     updatePieces={updatePieces}
                 />
             ))}
