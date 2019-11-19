@@ -1,42 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Piece } from 'app/components/puzzle';
 import { getSelection, swapSelection } from 'app/utilities';
 import { IMAGE } from 'app/shapes';
 
-const Puzzle = ({ rows, columns, image }) => {
-    const [active, setActive] = useState(undefined);
-    const [selection, setSelection] = useState([]);
-    const togglePiece = (event) => {
-        const value = parseInt(event.currentTarget.value, 10);
+const initialState = {
+    active: undefined,
+    selection: [],
+};
 
-        if (active !== undefined) {
-            setSelection(swapSelection(selection, active, value));
-            setActive(undefined);
-        } else {
-            setActive(value);
+function reducer(state, action) {
+    switch (action.type) {
+        case 'toggle': {
+            const { active, selection } = state;
+            if (active !== undefined) {
+                return {
+                    active: undefined,
+                    selection: swapSelection(selection, active, action.value),
+                };
+            }
+            return {
+                ...state,
+                active: action.value,
+            };
         }
-    };
+        case 'init':
+            return {
+                active: undefined,
+                selection: getSelection(action.pieces),
+            };
+        default:
+            throw new Error();
+    }
+}
+
+const Puzzle = ({ rows, columns, image }) => {
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
         if (image) {
-            setSelection(getSelection(rows * columns));
+            dispatch({ type: 'init', pieces: rows * columns });
         }
     }, [rows, columns, image]);
 
     return (
         <div className="puzzle__pieces">
-            {selection.map((value, index) => (
+            {state.selection.map((value, index) => (
                 <Piece
                     key={`p-${value}`}
                     piece={value}
-                    active={value === active}
+                    active={value === state.active}
                     solved={value === index}
                     rows={rows}
                     columns={columns}
                     image={image}
-                    togglePiece={togglePiece}
+                    dispatch={dispatch}
                 />
             ))}
         </div>
