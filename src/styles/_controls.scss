@@ -17,6 +17,7 @@
     background-color: transparent;
     border: 2px solid $blue;
     color: inherit;
+    cursor: pointer;
     margin-right: 8px;
     overflow: hidden;
     padding: 0;
@@ -30,5 +31,9 @@
 
     &[value="portrait"] {
         height: 24px / 3 * 4;
+    }
+
+    @include hover {
+        background-color: hsl(210, 100%, 90%);
     }
 }
