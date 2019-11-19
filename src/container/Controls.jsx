@@ -7,6 +7,8 @@ import koali2 from 'app/images/DSC00578.jpeg';
 import koali3 from 'app/images/DSC00572.jpeg';
 import koali4 from 'app/images/DSC00563.jpeg';
 import pferd from 'app/images/DSC00579.jpeg';
+import schwimmbad from 'app/images/schwimmbad.jpg';
+import tour from 'app/images/tour.jpg';
 
 const Controls = ({ rows, columns, updatePuzzle, setSource }) => {
     const changeImage = ({ target }) => {
@@ -33,6 +35,8 @@ const Controls = ({ rows, columns, updatePuzzle, setSource }) => {
                 <option value={koali3}>Kürbis</option>
                 <option value={koali4}>Festival of Lights</option>
                 <option value={pferd}>Pferdchen</option>
+                <option value={schwimmbad}>Schwimmbad</option>
+                <option value={tour}>Tour</option>
             </select>
             <label htmlFor="format">Format</label>
             <div className="control--big">
