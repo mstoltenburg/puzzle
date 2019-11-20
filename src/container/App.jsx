@@ -2,89 +2,13 @@ import React, { useReducer, useRef, useCallback } from 'react';
 
 import { Preview } from 'app/components/puzzle';
 import { Puzzle, Controls } from 'app/container';
-
-const initialState = {
-    image: undefined,
-    rows: 3,
-    columns: 4,
-    format: 'landscape',
-    width: 720,
-    height: 540,
-    ratio: 720 / 540,
-};
-
-function reducer(state, action) {
-    let format;
-    switch (action.type) {
-        case 'image': {
-            return {
-                ...state,
-                image: action.image,
-            };
-        }
-        case 'rows': {
-            return {
-                ...state,
-                rows: Number(action.rows),
-            };
-        }
-        case 'columns': {
-            return {
-                ...state,
-                columns: Number(action.columns),
-            };
-        }
-        case 'format':
-            switch (action.format) {
-                case 'portrait':
-                    format = {
-                        format: action.format,
-                        width: 540,
-                        height: 720,
-                        ratio: 540 / 720,
-                    };
-                    if (state.format === 'landscape') {
-                        format.rows = state.columns;
-                        format.columns = state.rows;
-                    }
-                    break;
-                case 'square':
-                    format = {
-                        format: action.format,
-                        width: 540,
-                        height: 540,
-                        ratio: 1,
-                    };
-                    break;
-                default:
-                    format = {
-                        format: 'landscape',
-                        width: 720,
-                        height: 540,
-                        ratio: 720 / 540,
-                    };
-                    if (state.format === 'portrait') {
-                        format.rows = state.columns;
-                        format.columns = state.rows;
-                    }
-            }
-            return {
-                ...state,
-                ...format,
-            };
-        default:
-            throw new Error();
-    }
-}
+import { puzzleReducer, puzzleState } from 'app/reducers';
 
 const App = () => {
-    const [puzzle, updatePuzzle] = useReducer(reducer, initialState);
+    const [puzzle, updatePuzzle] = useReducer(puzzleReducer, puzzleState);
     const motif = useRef(null);
-
     const setSource = useCallback(
-        (src) => {
-            motif.current.src = src;
-        },
+        (src) => { motif.current.src = src; },
         [],
     );
 
