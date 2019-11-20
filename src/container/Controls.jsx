@@ -1,16 +1,19 @@
-import React, { memo } from 'react';
+import React, { memo, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import irma from 'app/images/IMG_0356.jpeg';
 import koali from 'app/images/DSC00577.jpeg';
 import koali2 from 'app/images/DSC00578.jpeg';
-import koali3 from 'app/images/DSC00572.jpeg';
-import koali4 from 'app/images/DSC00563.jpeg';
+import pumpkin from 'app/images/DSC00572.jpeg';
+import lights from 'app/images/DSC00560.jpeg';
 import pferd from 'app/images/DSC00579.jpeg';
 import schwimmbad from 'app/images/schwimmbad.jpg';
+import venedig from 'app/images/venedig.jpg';
+import bank from 'app/images/DSC_1476.jpg';
 import tour from 'app/images/tour.jpg';
 
-const Controls = ({ rows, columns, updatePuzzle, setSource }) => {
+const Controls = ({ rows, columns, solved, updatePuzzle, setSource }) => {
+    const selector = useRef(null);
     const changeImage = ({ target }) => {
         setSource(target.value);
     };
@@ -24,17 +27,30 @@ const Controls = ({ rows, columns, updatePuzzle, setSource }) => {
         updatePuzzle({ type: 'format', format: target.value });
     };
 
+    useEffect(() => {
+        if (solved) {
+            setTimeout(() => {
+                const element = selector.current;
+                const { selectedIndex, length } = element;
+                element.selectedIndex = (selectedIndex + 1) % length;
+                element.dispatchEvent(new Event('change', { bubbles: true }));
+            }, 3000);
+        }
+    }, [solved]);
+
     return (
         <div className="controls">
             <label htmlFor="foto">Foto</label>
-            <select name="foto" id="foto" className="control--big" onChange={changeImage}>
+            <select name="foto" id="foto" className="control--big" onChange={changeImage} ref={selector}>
                 <option value={irma}>Irma</option>
                 <option value={koali}>Koala</option>
-                <option value={koali2}>Koala 2</option>
-                <option value={koali3}>Kürbis</option>
-                <option value={koali4}>Festival of Lights</option>
+                <option value={koali2}>Noch ein Koala</option>
+                <option value={pumpkin}>Halloween</option>
+                <option value={lights}>Festival of Lights</option>
                 <option value={pferd}>Pferdchen</option>
                 <option value={schwimmbad}>Schwimmbad</option>
+                <option value={venedig}>Venedig</option>
+                <option value={bank}>Bank</option>
                 <option value={tour}>Tour</option>
             </select>
             <label htmlFor="format">Format</label>
@@ -62,6 +78,7 @@ const Controls = ({ rows, columns, updatePuzzle, setSource }) => {
 Controls.propTypes = {
     rows: PropTypes.number.isRequired,
     columns: PropTypes.number.isRequired,
+    solved: PropTypes.bool.isRequired,
     updatePuzzle: PropTypes.func.isRequired,
     setSource: PropTypes.func.isRequired,
 };

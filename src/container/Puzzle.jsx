@@ -9,7 +9,7 @@ import { PUZZLE_FORMATS } from 'app/config';
 
 const { style } = document.documentElement;
 
-const Puzzle = ({ puzzle }) => {
+const Puzzle = ({ puzzle, setSolved }) => {
     const [pieces, updatePieces] = useReducer(piecesReducer, piecesState);
     const [dimensions, setDimensions] = useState({});
     const { image, rows, columns, format, ratio } = puzzle;
@@ -26,6 +26,10 @@ const Puzzle = ({ puzzle }) => {
     useEffect(() => {
         style.setProperty('--preview-height', `${PUZZLE_FORMATS[format]}%`);
     }, [format]);
+
+    useEffect(() => {
+        setSolved(pieces.ordered);
+    }, [pieces.ordered, setSolved]);
 
     useEffect(() => {
         if (naturalWidth && naturalHeight) {
@@ -58,6 +62,7 @@ const Puzzle = ({ puzzle }) => {
 
 Puzzle.propTypes = {
     puzzle: PropTypes.shape(PUZZLE).isRequired,
+    setSolved: PropTypes.func.isRequired,
 };
 
 export default Puzzle;
