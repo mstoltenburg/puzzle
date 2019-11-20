@@ -2,44 +2,15 @@ import React, { useReducer, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Piece } from 'app/components/puzzle';
-import { getSelection, swapSelection, getImage } from 'app/utilities';
+import { piecesReducer, piecesState } from 'app/reducers';
+import { getImage } from 'app/utilities';
 import { PUZZLE } from 'app/shapes';
 import { PUZZLE_FORMATS } from 'app/config';
 
-
-const initialState = {
-    active: undefined,
-    list: [],
-};
-
-function reducer(state, action) {
-    switch (action.type) {
-        case 'toggle': {
-            const { active, list } = state;
-            if (active !== undefined) {
-                return {
-                    active: undefined,
-                    list: swapSelection(list, active, action.value),
-                };
-            }
-            return {
-                ...state,
-                active: action.value,
-            };
-        }
-        case 'init':
-            return {
-                active: undefined,
-                list: getSelection(action.pieces),
-            };
-        default:
-            throw new Error();
-    }
-}
 const { style } = document.documentElement;
 
 const Puzzle = ({ puzzle }) => {
-    const [pieces, updatePieces] = useReducer(reducer, initialState);
+    const [pieces, updatePieces] = useReducer(piecesReducer, piecesState);
     const [dimensions, setDimensions] = useState({});
     const { image, rows, columns, format, ratio } = puzzle;
     const { naturalWidth, naturalHeight, src } = image || {};
