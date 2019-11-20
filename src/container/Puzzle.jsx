@@ -39,7 +39,7 @@ function reducer(state, action) {
 const Puzzle = ({ puzzle }) => {
     const [pieces, updatePieces] = useReducer(reducer, initialState);
     const [dimensions, setDimensions] = useState({});
-    const { image, rows, columns, ratio } = puzzle;
+    const { image, rows, columns, format, ratio } = puzzle;
     const { naturalWidth, naturalHeight, src } = image || {};
 
     useEffect(() => {
@@ -60,7 +60,7 @@ const Puzzle = ({ puzzle }) => {
         if (src) {
             updatePieces({ type: 'init', pieces: rows * columns });
         }
-    }, [rows, columns, src]);
+    }, [rows, columns, format, src]);
 
     return (
         <div className="puzzle__pieces">
