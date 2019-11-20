@@ -36,6 +36,7 @@ function reducer(state, action) {
             throw new Error();
     }
 }
+const { style } = document.documentElement;
 
 const Puzzle = ({ puzzle }) => {
     const [pieces, updatePieces] = useReducer(reducer, initialState);
@@ -44,15 +45,15 @@ const Puzzle = ({ puzzle }) => {
     const { naturalWidth, naturalHeight, src } = image || {};
 
     useEffect(() => {
-        document.documentElement.style.setProperty('--puzzle-rows', rows);
+        style.setProperty('--puzzle-rows', rows);
     }, [rows]);
 
     useEffect(() => {
-        document.documentElement.style.setProperty('--puzzle-columns', columns);
+        style.setProperty('--puzzle-columns', columns);
     }, [columns]);
 
     useEffect(() => {
-        document.documentElement.style.setProperty('--preview-height', `${PUZZLE_FORMATS[format]}%`);
+        style.setProperty('--preview-height', `${PUZZLE_FORMATS[format]}%`);
     }, [format]);
 
     useEffect(() => {
