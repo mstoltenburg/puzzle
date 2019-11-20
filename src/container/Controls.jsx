@@ -30,8 +30,8 @@ const Controls = ({ rows, columns, updatePuzzle, setSource }) => {
             <label htmlFor="foto">Foto</label>
             <select name="foto" id="foto" className="control--big" onChange={changeImage}>
                 <option value={irma}>Irma</option>
-                <option value={koali}>Koali</option>
-                <option value={koali2}>Koali 2</option>
+                <option value={koali}>Koala</option>
+                <option value={koali2}>Koala 2</option>
                 <option value={koali3}>Kürbis</option>
                 <option value={koali4}>Festival of Lights</option>
                 <option value={pferd}>Pferdchen</option>
