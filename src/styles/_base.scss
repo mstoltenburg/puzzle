@@ -8,5 +8,9 @@ body {
     line-height: $line-height-base;
     margin: 0;
     min-width: 320px;
-    padding: 20px;
+    padding: 12px;
+
+    @include for-tablet-up {
+        padding: 20px;
+    }
 }
