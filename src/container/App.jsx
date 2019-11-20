@@ -93,7 +93,6 @@ const App = () => {
             <Puzzle puzzle={puzzle} />
             <aside className="sidebar">
                 <Preview
-                    format={puzzle.format}
                     updatePuzzle={updatePuzzle}
                     ref={motif}
                 />

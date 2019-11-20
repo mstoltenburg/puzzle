@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Piece } from 'app/components/puzzle';
 import { getSelection, swapSelection, getImage } from 'app/utilities';
 import { PUZZLE } from 'app/shapes';
+import { PUZZLE_FORMATS } from 'app/config';
 
 
 const initialState = {
@@ -49,6 +50,10 @@ const Puzzle = ({ puzzle }) => {
     useEffect(() => {
         document.documentElement.style.setProperty('--puzzle-columns', columns);
     }, [columns]);
+
+    useEffect(() => {
+        document.documentElement.style.setProperty('--preview-height', `${PUZZLE_FORMATS[format]}%`);
+    }, [format]);
 
     useEffect(() => {
         if (naturalWidth && naturalHeight) {

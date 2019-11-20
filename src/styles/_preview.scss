@@ -1,3 +1,7 @@
+:root {
+    --preview-height: 100% / 4 * 3;
+}
+
 .preview {
     width: 240px;
     margin-bottom: 20px;
@@ -11,15 +15,7 @@
 
     &::before {
         content: '';
-    }
-    &--landscape::before {
-        padding-bottom: 100% / 4 * 3;
-    }
-    &--square::before {
-        padding-bottom: 100%;
-    }
-    &--portrait::before {
-        padding-bottom: 100% / 3 * 4;
+        padding-bottom: var(--preview-height);
     }
 }
 

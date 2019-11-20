@@ -1,9 +1,9 @@
-import React, { forwardRef, useState } from 'react';
+import React, { memo, forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import imageSrc from 'app/images/IMG_0356.jpeg';
 
-const Preview = forwardRef(({ format, updatePuzzle }, ref) => {
+const Preview = forwardRef(({ updatePuzzle }, ref) => {
     const [hidden, setHidden] = useState(true);
     const toggle = () => setHidden(!hidden);
     const updateImage = ({ target }) => {
@@ -12,7 +12,7 @@ const Preview = forwardRef(({ format, updatePuzzle }, ref) => {
 
     return (
         <div className="preview">
-            <div className={`preview__canvas preview__canvas--${format}`} hidden={hidden}>
+            <div className="preview__canvas" hidden={hidden}>
                 <img className="preview__image" src={imageSrc} ref={ref} onLoad={updateImage} alt="Vorschau" />
             </div>
             <label className="preview__label" htmlFor="preview">
@@ -24,8 +24,7 @@ const Preview = forwardRef(({ format, updatePuzzle }, ref) => {
 });
 
 Preview.propTypes = {
-    format: PropTypes.string.isRequired,
     updatePuzzle: PropTypes.func.isRequired,
 };
 
-export default Preview;
+export default memo(Preview);
