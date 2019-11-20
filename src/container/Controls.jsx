@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import irma from 'app/images/IMG_0356.jpeg';
@@ -12,8 +12,7 @@ import tour from 'app/images/tour.jpg';
 
 const Controls = ({ rows, columns, updatePuzzle, setSource }) => {
     const changeImage = ({ target }) => {
-        const { value } = target;
-        setSource(value);
+        setSource(target.value);
     };
     const changeRows = ({ target }) => {
         updatePuzzle({ type: 'rows', rows: target.value });
@@ -67,4 +66,4 @@ Controls.propTypes = {
     setSource: PropTypes.func.isRequired,
 };
 
-export default Controls;
+export default memo(Controls);

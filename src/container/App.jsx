@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useReducer, useRef, useCallback } from 'react';
 
 import { Preview } from 'app/components/puzzle';
 import { Puzzle, Controls } from 'app/container';
@@ -81,11 +81,12 @@ const App = () => {
     const [puzzle, updatePuzzle] = useReducer(reducer, initialState);
     const motif = useRef(null);
 
-    const setSource = (src) => {
-        if (motif.current) {
+    const setSource = useCallback(
+        (src) => {
             motif.current.src = src;
-        }
-    };
+        },
+        [],
+    );
 
     return (
         <main className="app">
