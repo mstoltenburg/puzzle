@@ -43,11 +43,14 @@ const Puzzle = ({ puzzle, setSolved }) => {
         }
     }, [rows, columns, format, src]);
 
+    const buster = Number(rows * columns * ratio).toFixed(2);
+    // const buster = 1;
+
     return (
         <div className="puzzle__pieces">
             {pieces.list.map((value, index) => (
                 <Piece
-                    key={`p-${value}`}
+                    key={`p-${value}-${buster}`}
                     piece={value}
                     active={value === pieces.active}
                     solved={value === index}
