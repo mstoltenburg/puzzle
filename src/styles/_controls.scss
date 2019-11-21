@@ -13,6 +13,10 @@
     grid-column-end: span 2;
 }
 
+.control--row {
+    grid-column-end: span 3;
+}
+
 .control__button {
     background-color: transparent;
     border: 2px solid $blue;
@@ -33,7 +37,50 @@
         height: 24px / 3 * 4;
     }
 
-    @include hover {
+    &:hover,
+    &:focus {
         background-color: hsl(210, 100%, 90%);
     }
+
+    &:disabled {
+        background-color: hsl(210, 100%, 90%);
+        cursor: default;
+    }
+}
+
+.control__control {
+    margin-right: .5em;
+}
+
+.control__number {
+    max-width: 3.5ch;
+}
+
+.control__icon {
+    &::before {
+        @extend %fa;
+        content: '\f021';
+        cursor: pointer;
+        font-size: 1.25em;
+        vertical-align: -0.1em;
+        line-height: 1;
+    }
+}
+
+.control__control {
+    display: none;
+}
+
+.control__control:checked + .control__icon {
+    &::before {
+        color: $blue;
+    }
+}
+
+.result {
+    background: $blue;
+    border-radius: 50%;
+    margin: 12px auto;
+    padding: 25%;
+    width: 25%;
 }

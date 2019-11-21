@@ -24,6 +24,7 @@ const App = () => {
                 <Controls
                     rows={puzzle.rows}
                     columns={puzzle.columns}
+                    format={puzzle.format}
                     solved={solved}
                     updatePuzzle={updatePuzzle}
                     setSource={setSource}

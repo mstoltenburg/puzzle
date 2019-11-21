@@ -12,7 +12,12 @@ import venedig from 'app/images/venedig.jpg';
 import bank from 'app/images/DSC_1476.jpg';
 import tour from 'app/images/tour.jpg';
 
-const Controls = ({ rows, columns, solved, updatePuzzle, setSource }) => {
+import { FormatButton } from 'app/components/controls';
+import { FORMAT_CONTROLS } from 'app/config';
+
+const Controls = ({
+    rows, columns, format, solved, updatePuzzle, setSource,
+}) => {
     const selector = useRef(null);
     const changeImage = ({ target }) => {
         setSource(target.value);
@@ -55,15 +60,16 @@ const Controls = ({ rows, columns, solved, updatePuzzle, setSource }) => {
             </select>
             <label htmlFor="format">Format</label>
             <div className="control--big">
-                <button name="format" value="landscape" type="button" className="control__button" onClick={changeFormat}>
-                    Querformat
-                </button>
-                <button name="format" value="square" type="button" className="control__button" onClick={changeFormat}>
-                    Quadrat
-                </button>
-                <button name="format" value="portrait" type="button" className="control__button" onClick={changeFormat}>
-                    Hochformat
-                </button>
+                {Object.entries(FORMAT_CONTROLS).map(([key, value]) => (
+                    <FormatButton
+                        key={key}
+                        format={key}
+                        disabled={key === format}
+                        changeFormat={changeFormat}
+                    >
+                        {value}
+                    </FormatButton>
+                ))}
             </div>
             <label htmlFor="rows">Reihen</label>
             <input id="rows" type="range" onChange={changeRows} min="1" max="6" value={rows} />
@@ -78,6 +84,7 @@ const Controls = ({ rows, columns, solved, updatePuzzle, setSource }) => {
 Controls.propTypes = {
     rows: PropTypes.number.isRequired,
     columns: PropTypes.number.isRequired,
+    format: PropTypes.string.isRequired,
     solved: PropTypes.bool.isRequired,
     updatePuzzle: PropTypes.func.isRequired,
     setSource: PropTypes.func.isRequired,

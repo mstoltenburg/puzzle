@@ -14,3 +14,15 @@ body {
         padding: 20px;
     }
 }
+
+input, select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+%fa {
+    @include font-smoothing;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+}
