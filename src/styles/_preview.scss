@@ -11,6 +11,7 @@
     &:not([hidden]) {
         display: flex;
     }
+    margin-bottom: 10px;
     position: relative;
 
     &::before {
@@ -29,9 +30,26 @@
 .preview__label {
     cursor: pointer;
     display: block;
-    margin-top: 10px;
+}
 
-    input {
-        margin-right: 8px;
+.preview__icon {
+    &::before {
+        @extend %fa;
+        content: '\f070';
+        font-size: 1.25em;
+        margin-right: 6px;
+        vertical-align: -0.1em;
+        line-height: 1;
+    }
+}
+
+.preview__control {
+    display: none;
+}
+
+.preview__control:checked + .preview__icon {
+    &::before {
+        color: $blue;
+        content: '\f06e';
     }
 }
