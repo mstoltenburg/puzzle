@@ -1,5 +1,6 @@
 import React, { useReducer, useState, useRef, useCallback } from 'react';
 
+import { Camera } from 'app/components/controls';
 import { Preview } from 'app/components/puzzle';
 import { Puzzle, Controls } from 'app/container';
 import { puzzleReducer, puzzleState } from 'app/reducers';
@@ -20,6 +21,9 @@ const App = () => {
                 <Preview
                     updatePuzzle={updatePuzzle}
                     ref={motif}
+                />
+                <Camera
+                    setSource={setSource}
                 />
                 <Controls
                     rows={puzzle.rows}

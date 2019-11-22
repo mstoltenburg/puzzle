@@ -17,7 +17,7 @@ const Preview = forwardRef(({ updatePuzzle }, ref) => {
             </div>
             <label className="preview__label" htmlFor="preview">
                 <input className="preview__control" id="preview" type="checkbox" checked={!hidden} onChange={toggle} />
-                <span className="preview__icon" />
+                <span className="preview__icon preview__icon--preview" />
                 Vorschau anzeigen
             </label>
         </div>
