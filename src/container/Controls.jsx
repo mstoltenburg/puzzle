@@ -1,17 +1,6 @@
 import React, { memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import irma from 'app/images/IMG_0356.jpeg';
-import koali from 'app/images/DSC00577.jpeg';
-import koali2 from 'app/images/DSC00578.jpeg';
-import pumpkin from 'app/images/DSC00572.jpeg';
-import lights from 'app/images/DSC00560.jpeg';
-import pferd from 'app/images/DSC00579.jpeg';
-import schwimmbad from 'app/images/schwimmbad.jpg';
-import venedig from 'app/images/venedig.jpg';
-import bank from 'app/images/DSC_1476.jpg';
-import tour from 'app/images/tour.jpg';
-
 import { FormatButton, Spinner } from 'app/components/controls';
 import { FORMAT_CONTROLS, SOURCES } from 'app/config';
 
@@ -36,16 +25,9 @@ const Controls = ({
         <div className="controls">
             <label htmlFor="foto">Foto</label>
             <select name="foto" id="foto" className="control--big" onChange={changeImage} ref={selector}>
-                <option value={irma}>Irma</option>
-                <option value={koali}>Koala</option>
-                <option value={koali2}>Noch ein Koala</option>
-                <option value={pumpkin}>Halloween</option>
-                <option value={lights}>Festival of Lights</option>
-                <option value={pferd}>Pferdchen</option>
-                <option value={schwimmbad}>Schwimmbad</option>
-                <option value={venedig}>Venedig</option>
-                <option value={bank}>Bank</option>
-                <option value={tour}>Tour</option>
+                {Object.entries(SOURCES).map(([label, value]) => (
+                    <option key={label} value={value}>{label}</option>
+                ))}
             </select>
             <label htmlFor="format">Format</label>
             <div className="control--big">
