@@ -1,0 +1,67 @@
+$spinner-size: 24px;
+$spinner-border: 8px;
+$spinner-time: 1s;
+
+.spinner {
+    animation: swap $spinner-time * 2 steps(1) infinite forwards;
+    float: right;
+    position: relative;
+    width: $spinner-size;
+    height: $spinner-size;
+
+    &::before,
+    &::after {
+        border-radius: 50%;
+        border-style: solid;
+        border-width: $spinner-border;
+        box-sizing: border-box;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    &::before {
+        border-color: transparent transparent $blue $blue;
+        animation: rotation $spinner-time linear infinite both;
+    }
+
+    &::after {
+        animation: dance $spinner-time * 2 steps(1) $spinner-time / -2 infinite both;
+    }
+}
+
+@keyframes swap {
+    0% {
+        transform: rotate(0turn);
+    }
+    50% {
+        transform: rotate(0.5turn);
+    }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0.125turn);
+    }
+    100% {
+        transform: rotate(1.125turn);
+    }
+}
+
+@keyframes dance {
+    0% {
+        transform: rotate(0);
+        border-color: white;
+        border-radius: 0;
+        border-width: 0 0 0 ($spinner-size / 2);
+    }
+    50% {
+        transform: rotate(0.625turn);
+        border-color: transparent transparent $blue $blue;
+        border-radius: 50%;
+        border-width: $spinner-border;
+    }
+}

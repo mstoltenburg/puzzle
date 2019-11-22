@@ -1,4 +1,4 @@
-import React, { memo, useRef, useReducer, useEffect } from 'react';
+import React, { memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import irma from 'app/images/IMG_0356.jpeg';
@@ -12,17 +12,13 @@ import venedig from 'app/images/venedig.jpg';
 import bank from 'app/images/DSC_1476.jpg';
 import tour from 'app/images/tour.jpg';
 
-import { FormatButton } from 'app/components/controls';
-import { rotationReducer, rotationState } from 'app/reducers';
-import { FORMAT_CONTROLS } from 'app/config';
+import { FormatButton, Spinner } from 'app/components/controls';
+import { FORMAT_CONTROLS, SOURCES } from 'app/config';
 
 const Controls = ({
     rows, columns, format, solved, updatePuzzle, setSource,
 }) => {
     const selector = useRef(null);
-    const [rotation, updateRotation] = useReducer(
-        rotationReducer, rotationState,
-    );
     const changeImage = ({ target }) => {
         setSource(target.value);
     };
@@ -35,23 +31,6 @@ const Controls = ({
     const changeFormat = ({ target }) => {
         updatePuzzle({ type: 'format', format: target.value });
     };
-    const changeDelay = ({ target }) => {
-        updateRotation({ type: 'delay', delay: target.value });
-    };
-    const changeRotation = ({ target }) => {
-        updateRotation({ type: 'rotation', rotate: target.checked });
-    };
-
-    useEffect(() => {
-        if (solved && rotation.rotate) {
-            setTimeout(() => {
-                const element = selector.current;
-                const { selectedIndex, length } = element;
-                element.selectedIndex = (selectedIndex + 1) % length;
-                element.dispatchEvent(new Event('change', { bubbles: true }));
-            }, rotation.delay * 1000);
-        }
-    }, [solved, rotation]);
 
     return (
         <div className="controls">
@@ -88,20 +67,7 @@ const Controls = ({
             <input id="columns" type="range" onChange={changeColumns} min="1" max="6" value={columns} />
             <span className="control__value">{columns}</span>
             <span>Modus</span>
-            <div className="control--big">
-                <label htmlFor="rotate">
-                    <input className="control__control" type="checkbox" id="rotate" onChange={changeRotation} checked={rotation.rotate} />
-                    <span className="control__icon control__icon--rotate" />
-                </label>
-                nach
-                {' '}
-                <input className="control__number" type="number" onChange={changeDelay} size="1" min="1" max="9" value={rotation.delay} />
-                {' '}
-                Sek.
-            </div>
-            <div className="control--row">
-                {solved && <div className="result" />}
-            </div>
+            <Spinner selector={selector} solved={solved} />
         </div>
     );
 };
