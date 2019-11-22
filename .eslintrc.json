@@ -8,7 +8,7 @@
     "plugins": ["react-hooks"],
     "rules": {
         "no-use-before-define": 0,
-        "max-len": ["error", 80, 2, {
+        "max-len": ["error", 96, 2, {
             "ignoreUrls": true,
             "ignoreComments": false,
             "ignoreRegExpLiterals": true,
@@ -22,6 +22,7 @@
         ],
         "import/no-extraneous-dependencies": 0,
         "import/no-unresolved": 0,
+        "jsx-a11y/media-has-caption": 0,
         "jsx-a11y/click-events-have-key-events": 0,
         "jsx-a11y/label-has-associated-control": 0,
         "jsx-a11y/label-has-for": ["error", {
