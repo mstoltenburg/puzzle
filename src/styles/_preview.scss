@@ -8,11 +8,17 @@
 }
 
 .preview__canvas {
-    &:not([hidden]) {
-        display: flex;
-    }
+    display: flex;
     margin-bottom: 10px;
+    max-height: 320px;
+    overflow: hidden;
     position: relative;
+    transition: margin, max-height .2s;
+
+    &[hidden] {
+        margin-bottom: 0;
+        max-height: 0;
+    }
 
     &::before {
         content: '';
