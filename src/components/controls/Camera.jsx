@@ -50,7 +50,7 @@ const Camera = ({ setSource }) => {
     return (
         <div className="preview">
             <div className="preview__canvas preview__canvas--camera" hidden={hidden} onClick={takeSnapshot} role="button" tabIndex={-1}>
-                <canvas className="preview__image" ref={canvas} width={cameraWidth} height={cameraHeight} />
+                <canvas className="preview__image" ref={canvas} width={cameraWidth} height={cameraHeight} hidden />
                 <video className="preview__image" ref={video} width={cameraWidth} height={cameraHeight} autoPlay />
             </div>
             <div className="preview__error" hidden={!error}>
