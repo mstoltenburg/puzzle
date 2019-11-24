@@ -4,4 +4,5 @@ node_modules
 public
 junit.xml
 images/
+src/sounds/*.mp3
 *.sublime-*
