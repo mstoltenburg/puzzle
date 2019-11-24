@@ -80,6 +80,11 @@ const config = (env, argv) => {
                     use: 'file-loader?name=data/[name].[ext]',
                 },
                 {
+                    exclude,
+                    test: /\.mp3$/,
+                    use: 'file-loader?name=sounds/[name].[ext]',
+                },
+                {
                     exclude: /(public|__tests__)/,
                     test: /\.(eot|ttf|woff|woff2)$/,
                     use: 'file-loader?name=fonts/[name].[ext]',

@@ -2,6 +2,7 @@ import React, { memo, useRef, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { cameraReducer, cameraState } from 'app/reducers';
+import { play } from 'app/utilities';
 
 const cameraWidth = 640;
 const cameraHeight = (cameraWidth / 4) * 3;
@@ -15,6 +16,7 @@ const Camera = ({ setSource }) => {
     const { filming, hidden, error } = camera;
     const toggle = () => updateCamera({ type: 'toggle' });
     const takeSnapshot = () => {
+        play('shutter');
         const context = canvas.current.getContext('2d', { alpha: false });
         context.drawImage(video.current, 0, 0, cameraWidth, cameraHeight);
         setSource(canvas.current.toDataURL('image/png'));

@@ -1,3 +1,5 @@
+export play from './sounds';
+
 function valueEqualsIndex(value, index) {
     return value === index;
 }
