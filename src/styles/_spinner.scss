@@ -65,3 +65,27 @@ $spinner-time: 1s;
         border-width: $spinner-border;
     }
 }
+
+$turn: 40% * 2 * pi();
+
+@keyframes draw {
+    from {
+        stroke-dashoffset: $turn;
+    }
+    to {
+        stroke-dashoffset: -$turn;
+    }
+}
+
+.svg-spinner {
+    width: 200px;
+    transform: rotate(-90deg);
+}
+
+.svg-circle {
+    animation: draw 2s linear infinite both;
+    fill: none;
+    stroke-dasharray: $turn $turn;
+    stroke-width: 20px;
+    stroke: $blue;
+}
