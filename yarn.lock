@@ -742,6 +742,13 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.7.4":
+  version "7.7.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.4.tgz#b23a856751e4bf099262f867767889c0e3fe175b"
+  integrity sha512-r24eVUUr0QqNZa+qrImUk8fn5SPhHq+IfYvIoIMg0do3GdK9sMdiLKP3GYVVaxpPKORgm8KRKaNTEhAjgIpLMw==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/template@^7.4.0", "@babel/template@^7.7.0":
   version "7.7.0"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.7.0.tgz#4fadc1b8e734d97f56de39c77de76f2562e597d0"
@@ -1492,6 +1499,14 @@ atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+
+automation-events@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/automation-events/-/automation-events-1.0.7.tgz#4d5a3e8fa4c1871c67be2b8512b11e319f60eafd"
+  integrity sha512-d+nzxZ1oergkldmrPXGX+FPJ+vY/eQgJcgK99XbJUTQr31lrwOZf+CH53BSvfi7rlmIp5A/DAHZGX0mUybtyRQ==
+  dependencies:
+    "@babel/runtime" "^7.7.4"
+    tslib "^1.10.0"
 
 autoprefixer@^9.7.1:
   version "9.7.1"
@@ -7829,6 +7844,15 @@ stack-utils@^1.0.1:
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.2.tgz#33eba3897788558bebfc2db059dc158ec36cebb8"
   integrity sha512-MTX+MeG5U994cazkjd/9KNAapsHnibjMLnfXodlkXw76JEea0UiNzrqidzo1emMwk7w5Qhc9jd4Bn9TBb1MFwA==
 
+standardized-audio-context@^23.0.4:
+  version "23.0.4"
+  resolved "https://registry.yarnpkg.com/standardized-audio-context/-/standardized-audio-context-23.0.4.tgz#b738c82d24a81153544efe314bbaf9a88194b78a"
+  integrity sha512-+MwvvFMxRuP3V5E+RpZmRvfY0R0h4EpIAcJmb9OuDxO4/5TRR7I39LUoUthoJG9Ub4ZG5XiwTm6UFi1Mhm7mJA==
+  dependencies:
+    "@babel/runtime" "^7.7.4"
+    automation-events "^1.0.7"
+    tslib "^1.10.0"
+
 static-extend@^0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/static-extend/-/static-extend-0.1.2.tgz#60809c39cbff55337226fd5e0b520f341f1fb5c6"
@@ -8340,7 +8364,7 @@ trim-right@^1.0.1:
   dependencies:
     glob "^7.1.2"
 
-tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==

@@ -1,3 +1,5 @@
+import { AudioContext } from 'standardized-audio-context';
+
 import shutter from 'app/sounds/camera-shutter-click-01.mp3';
 import click from 'app/sounds/Woosh-Mark_DiAngelo-4778593.mp3';
 import success from 'app/sounds/Water-Drop-Low-SoundBible.com-1501529809.mp3';
@@ -5,7 +7,8 @@ import success from 'app/sounds/Water-Drop-Low-SoundBible.com-1501529809.mp3';
 // import success from 'app/sounds/button-20.mp3';
 import achivement from 'app/sounds/magic-chime-01.mp3';
 
-const context = new window.AudioContext();
+const StandardizedAudioContext = window.AudioContext || AudioContext;
+const context = new StandardizedAudioContext();
 const files = { shutter, click, success, achivement };
 const audioData = {};
 
@@ -17,9 +20,8 @@ Object.entries(files).forEach(([name, url]) => {
 });
 
 export default (name, when, offset) => {
-    const ctx = new window.AudioContext();
-    const source = ctx.createBufferSource();
+    const source = context.createBufferSource();
     source.buffer = audioData[name];
-    source.connect(ctx.destination);
+    source.connect(context.destination);
     source.start(when, offset);
 };
