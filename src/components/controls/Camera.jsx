@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { cameraReducer, cameraState } from 'app/reducers';
 import { play } from 'app/utilities';
 
+const supported = navigator.mediaDevices && navigator.mediaDevices.getUserMedia;
 const cameraWidth = 640;
 const cameraHeight = (cameraWidth / 4) * 3;
 // Not adding `{ audio: true }` since we only want video now
@@ -50,7 +51,7 @@ const Camera = ({ setSource, updateSources }) => {
         }
     }, [filming, video]);
 
-    return (
+    return !supported ? null : (
         <div className="preview">
             <div className="preview__canvas preview__canvas--camera" hidden={hidden} onClick={takeSnapshot} role="button" tabIndex={-1}>
                 <canvas className="preview__image" ref={canvas} width={cameraWidth} height={cameraHeight} hidden />
