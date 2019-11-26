@@ -23,7 +23,8 @@ const FileInput = ({ setSource, updateSources }) => {
 
             if (!error) {
                 const reader = new FileReader();
-                reader.onload = ({ target: { result } }) => {
+                reader.onload = (event) => {
+                    const { result } = event.target;
                     const name = file.name.substring(0, file.name.lastIndexOf('.'));
                     setSource(result);
                     updateSources({ type: 'add', name, image: result });
