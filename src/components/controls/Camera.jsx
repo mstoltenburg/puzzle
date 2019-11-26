@@ -9,7 +9,7 @@ const cameraHeight = (cameraWidth / 4) * 3;
 // Not adding `{ audio: true }` since we only want video now
 const constraints = { video: { width: cameraWidth, height: cameraHeight } };
 
-const Camera = ({ setSource }) => {
+const Camera = ({ setSource, updateSources }) => {
     const video = useRef(null);
     const canvas = useRef(null);
     const [camera, updateCamera] = useReducer(cameraReducer, cameraState);
@@ -19,7 +19,10 @@ const Camera = ({ setSource }) => {
         play('shutter');
         const context = canvas.current.getContext('2d', { alpha: false });
         context.drawImage(video.current, 0, 0, cameraWidth, cameraHeight);
-        setSource(canvas.current.toDataURL('image/png'));
+        const image = canvas.current.toDataURL('image/png');
+        const name = `Foto ${new Date().toLocaleString('de-DE')}`;
+        setSource(image);
+        updateSources({ type: 'add', name, image });
         updateCamera({ type: 'reset' });
     };
 
@@ -68,6 +71,7 @@ const Camera = ({ setSource }) => {
 
 Camera.propTypes = {
     setSource: PropTypes.func.isRequired,
+    updateSources: PropTypes.func.isRequired,
 };
 
 export default memo(Camera);
