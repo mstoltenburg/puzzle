@@ -21,11 +21,12 @@ const Controls = ({ puzzle, solved, sources, updatePuzzle, setSource, updateSour
     const changeFormat = ({ target }) => {
         updatePuzzle({ type: 'format', format: target.value });
     };
+    const selected = image ? image.src.replace(window.location.origin, '') : undefined;
 
     return (
         <div className="controls">
             <label htmlFor="foto">Motiv</label>
-            <select name="foto" id="foto" className="control--big  control--select" onChange={changeImage} ref={selector} value={image && image.src}>
+            <select name="foto" id="foto" className="control--big  control--select" onChange={changeImage} ref={selector} value={selected}>
                 {Object.entries(sources).map(([label, value]) => (
                     <option key={label} value={value}>{label}</option>
                 ))}
