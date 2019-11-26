@@ -28,6 +28,7 @@ const Piece = ({ piece, active, solved, puzzle, dimensions, updatePieces }) => {
             offsetY += height * Math.floor(piece / columns);
 
             const ctx = canvas.current.getContext('2d', { alpha: false });
+            ctx.clearRect(0, 0, pieceWidth, pieceHeight);
             ctx.drawImage(
                 image, offsetX, offsetY, width, height,
                 0, 0, pieceWidth, pieceHeight,
