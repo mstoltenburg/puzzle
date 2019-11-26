@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-gap: .5em;
+    max-width: min-content;
 
     label {
         margin-right: .5em;
@@ -15,6 +16,10 @@
 
 .control--row {
     grid-column-end: span 3;
+}
+
+.control--file {
+    cursor: pointer;
 }
 
 .control__button {
@@ -71,6 +76,10 @@
         vertical-align: -0.1em;
         line-height: 1;
     }
+}
+
+input[type="file"] {
+    @include visuallyhidden();
 }
 
 .control__control {

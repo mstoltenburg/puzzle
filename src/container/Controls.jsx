@@ -29,6 +29,11 @@ const Controls = ({
                     <option key={label} value={value}>{label}</option>
                 ))}
             </select>
+            <span>Datei</span>
+            <label htmlFor="file" className="control--big control--file">
+                Datei wählen…
+                <FileInput setSource={setSource} updateSources={updateSources} />
+            </label>
             <label htmlFor="format">Format</label>
             <div className="control--big">
                 {Object.entries(FORMAT_CONTROLS).map(([key, value]) => (
