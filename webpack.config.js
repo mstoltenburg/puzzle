@@ -126,6 +126,7 @@ const config = (env, argv) => {
             port: 9001,
             stats: 'minimal',
             historyApiFallback: true,
+            disableHostCheck: true,
         },
     };
 
