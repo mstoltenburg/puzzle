@@ -40,7 +40,7 @@ const Spinner = ({ selector, solved }) => {
                 Sek.
             </span>
             <span>
-                <div className={rotation.rotate && solved ? 'spinner' : undefined} />
+                <div className={classNames('spinner', { 'spinner--spinning': rotation.rotate && solved })} />
             </span>
         </div>
     );

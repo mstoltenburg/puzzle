@@ -3,11 +3,15 @@ $spinner-border: 6px;
 $spinner-time: 1s;
 
 .spinner {
-    animation: swap $spinner-time * 2 steps(1) infinite forwards;
     float: right;
+    margin-left: 8px;
     position: relative;
     width: $spinner-size;
     height: $spinner-size;
+}
+
+.spinner--spinning {
+    animation: swap $spinner-time * 2 steps(1) infinite forwards;
 
     &::before,
     &::after {
