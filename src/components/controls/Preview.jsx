@@ -1,7 +1,7 @@
 import React, { memo, forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import imageSrc from 'app/images/IMG_0356.jpeg';
+import { SOURCES } from 'app/config';
 
 const Preview = forwardRef(({ updatePuzzle }, ref) => {
     const [hidden, setHidden] = useState(true);
@@ -13,7 +13,7 @@ const Preview = forwardRef(({ updatePuzzle }, ref) => {
     return (
         <div className="preview">
             <div className="preview__canvas" hidden={hidden}>
-                <img className="preview__image" src={imageSrc} ref={ref} onLoad={updateImage} alt="Vorschau" />
+                <img className="preview__image" src={Object.values(SOURCES)[0]} ref={ref} onLoad={updateImage} alt="Vorschau" />
             </div>
             <label className="preview__label" htmlFor="preview">
                 <input className="preview__control" id="preview" type="checkbox" checked={!hidden} onChange={toggle} />
