@@ -2,8 +2,8 @@ import { AudioContext } from 'standardized-audio-context';
 
 import shutter from 'app/sounds/camera-shutter-click-01.mp3';
 import click from 'app/sounds/Woosh-Mark_DiAngelo-4778593.mp3';
-import success from 'app/sounds/Water-Drop-Low-SoundBible.com-1501529809.mp3';
-// import success from 'app/sounds/Bibi-Blocksberg.mp3';
+// import success from 'app/sounds/Water-Drop-Low-SoundBible.com-1501529809.mp3';
+import success from 'app/sounds/Bibi-Blocksberg.mp3';
 // import success from 'app/sounds/button-20.mp3';
 import achivement from 'app/sounds/magic-chime-01.mp3';
 

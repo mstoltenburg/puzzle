@@ -16,7 +16,7 @@ export default (state, action) => {
                 if (ordered) {
                     play('achivement');
                 } else if (active === list.indexOf(active)) {
-                    play('success');
+                    play('success', 0, 0.5);
                 } else {
                     play('click');
                 }
