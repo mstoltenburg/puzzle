@@ -30,8 +30,8 @@
         content: '\f067';
     }
 
-    &:hover,
-    &:focus {
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
         color: $blue;
     }
 }
