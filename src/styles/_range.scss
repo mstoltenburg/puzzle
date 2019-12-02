@@ -1,0 +1,41 @@
+.range {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    grid-gap: 10px;
+    max-width: min-content;
+}
+
+.range__button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: inherit;
+    margin: 0;
+    padding: 0;
+
+    span {
+        display: none;
+    }
+
+    &::before {
+        @extend %fa;
+    }
+
+    &--decrease::before {
+        content: '\f068';
+    }
+
+    &--increase::before {
+        content: '\f067';
+    }
+
+    &:hover,
+    &:focus {
+        color: $blue;
+    }
+}
+
+input[type="range"] {
+    max-width: 120px;
+}

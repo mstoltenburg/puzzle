@@ -1,7 +1,7 @@
 import React, { memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { FileInput, FormatButton, Spinner } from 'app/components/controls';
+import { FileInput, FormatButton, Range, Spinner } from 'app/components/controls';
 
 import { FORMAT_CONTROLS } from 'app/config';
 import { PUZZLE } from 'app/shapes';
@@ -11,12 +11,6 @@ const Controls = ({ puzzle, solved, sources, updatePuzzle, setSource, updateSour
     const selector = useRef(null);
     const changeImage = ({ target }) => {
         setSource(target.value);
-    };
-    const changeRows = ({ target }) => {
-        updatePuzzle({ type: 'rows', rows: target.value });
-    };
-    const changeColumns = ({ target }) => {
-        updatePuzzle({ type: 'columns', columns: target.value });
     };
     const changeFormat = ({ target }) => {
         updatePuzzle({ type: 'format', format: target.value });
@@ -50,11 +44,9 @@ const Controls = ({ puzzle, solved, sources, updatePuzzle, setSource, updateSour
                 ))}
             </div>
             <label htmlFor="rows">Reihen</label>
-            <input id="rows" type="range" onChange={changeRows} min="1" max="6" value={rows} />
-            <span className="control__value">{rows}</span>
+            <Range name="rows" value={rows} updatePuzzle={updatePuzzle} />
             <label htmlFor="columns">Spalten</label>
-            <input id="columns" type="range" onChange={changeColumns} min="1" max="6" value={columns} />
-            <span className="control__value">{columns}</span>
+            <Range name="columns" value={columns} updatePuzzle={updatePuzzle} />
             <span>Modus</span>
             <Spinner selector={selector} solved={solved} />
         </div>
