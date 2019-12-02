@@ -1,7 +1,7 @@
 .controls {
     align-items: center;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
     grid-gap: .5em;
     max-width: min-content;
     min-width: fit-content;
@@ -11,12 +11,8 @@
     }
 }
 
-.control--big {
-    grid-column-end: span 2;
-}
-
 .control--row {
-    grid-column-end: span 3;
+    grid-column-end: span 2;
 }
 
 .control--file {
@@ -81,6 +77,11 @@
 
 input[type="file"] {
     @include visuallyhidden();
+}
+
+.file__canvas,
+.file__meter {
+    width: 100%;
 }
 
 .control__control {

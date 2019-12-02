@@ -27,7 +27,7 @@ const Spinner = ({ selector, solved }) => {
     }, [solved, rotation, selector]);
 
     return (
-        <div className="control--big">
+        <div>
             <label htmlFor="rotate">
                 <input className="control__control" type="checkbox" id="rotate" onChange={changeRotation} checked={rotation.rotate} />
                 <span className={classNames('control__icon', { 'control__icon--rotate': rotation.rotate && solved })} />
