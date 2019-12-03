@@ -152,7 +152,7 @@ const FileInput = ({ setSource, updateSources }) => {
             ) : (
                 'Datei wählen…'
             )}
-            <input type="file" id="file" accept="image/*" onChange={handleFiles} data-limit="0.5" />
+            <input type="file" id="file" accept="image/*" onChange={handleFiles} data-limit="10" />
             <canvas className="file__canvas" ref={canvas} hidden />
         </label>
     );
