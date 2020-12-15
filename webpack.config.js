@@ -1,17 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const config = (env, argv) => {
     const isProduction = argv.mode === 'production';
     const publicPath = resolvePath('public/');
     const exclude = /(node_modules|public|__tests__)/;
-
-    const eslintRules = !isProduction ? {} : {
-        'no-console': [2, { allow: ['warn', 'error'] }],
-    };
 
     return {
         resolve: { extensions: ['.js', '.jsx'] },
@@ -19,17 +15,6 @@ const config = (env, argv) => {
         entry: './index.jsx',
         module: {
             rules: [
-                {
-                    enforce: 'pre',
-                    test: /\.(js|jsx)$/,
-                    exclude,
-                    loader: 'eslint-loader',
-                    options: {
-                        fix: true,
-                        failOnError: isProduction,
-                        rules: eslintRules,
-                    },
-                },
                 {
                     exclude,
                     test: /\.(js|jsx)$/,
@@ -42,57 +27,53 @@ const config = (env, argv) => {
                         MiniCssExtractPlugin.loader,
                         'css-loader',
                         'postcss-loader',
-                        'sass-loader'
+                        // Compiles Sass to CSS
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sassOptions: {
+                                    includePaths: [ 'src/styles/' ]
+                                }
+                            }
+                        }
                     ]
                 },
                 {
                     exclude,
                     test: /\.(png|jpe*g)$/,
-                    use: 'file-loader?name=[path][name].[ext]',
-                },
-                {
-                    test: /\.svg$/,
-                    include: resolvePath('src/svg'),
-                    use: [
-                        {
-                            loader: 'svg-sprite-loader',
-                            options: {
-                                extract: true,
-                            },
-                        },
-                        {
-                            loader: 'svgo-loader',
-                            options: {
-                                plugins: [
-                                    { removeTitle: false },
-                                    { removeViewBox: false },
-                                    {
-                                        removeAttrs: { attrs: '(fill|fill-opacity|stroke|stroke-width)' },
-                                    },
-                                ],
-                            },
-                        },
-                    ],
+                    type: 'asset/resource',
                 },
                 {
                     exclude,
                     test: /\.json$/,
-                    use: 'file-loader?name=data/[name].[ext]',
+                    type: 'asset/resource',
+                    generator: {
+                        filename: 'data/[name][ext]'
+                    },
                 },
                 {
                     exclude,
                     test: /\.mp3$/,
-                    use: 'file-loader?name=sounds/[name].[ext]',
+                    type: 'asset/resource',
+                    generator: {
+                        filename: 'sounds/[name][ext]'
+                    },
                 },
                 {
                     exclude: /(public|__tests__)/,
                     test: /\.(eot|ttf|woff|woff2)$/,
-                    use: 'file-loader?name=fonts/[name].[ext]',
+                    type: 'asset/resource',
+                    generator: {
+                        filename: 'fonts/[name][ext]'
+                    },
                 },
                 {
                     exclude,
                     test: /robots\.txt$/,
-                    use: 'file-loader?name=robots.txt',
+                    type: 'asset/resource',
+                    generator: {
+                        filename: '[name][ext]'
+                    },
                 },
             ],
         },
@@ -100,6 +81,7 @@ const config = (env, argv) => {
             filename: '[name].js',
             path: publicPath,
             publicPath: '/',
+            assetModuleFilename: '[path][name][ext]'
         },
         performance: {
             hints: false,
@@ -108,7 +90,6 @@ const config = (env, argv) => {
             new webpack.DefinePlugin({
                 IS_PRODUCTION: JSON.stringify(isProduction),
             }),
-            new SpriteLoaderPlugin(),
             new MiniCssExtractPlugin({
                 filename: "[name].css",
                 chunkFilename: "[id].css"
@@ -118,6 +99,11 @@ const config = (env, argv) => {
                 template: resolvePath('src/index.html'),
                 favicon: resolvePath('src/images/favicon.ico'),
                 hash: true,
+            }),
+            new ESLintPlugin({
+                extensions: ['js', 'jsx'],
+                fix: true,
+                failOnError: isProduction,
             }),
         ],
         devServer: {
