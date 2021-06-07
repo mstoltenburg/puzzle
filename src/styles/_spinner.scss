@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $spinner-size: 24px;
 $spinner-border: 6px;
 $spinner-time: 1s;
@@ -33,7 +35,7 @@ $spinner-time: 1s;
     }
 
     &::after {
-        animation: dance $spinner-time * 2 steps(1) $spinner-time / -2 infinite both;
+        animation: dance $spinner-time * 2 steps(1) math.div($spinner-time, -2) infinite both;
     }
 }
 
@@ -60,7 +62,7 @@ $spinner-time: 1s;
         transform: rotate(0);
         border-color: white;
         border-radius: 0;
-        border-width: 0 0 0 ($spinner-size / 2);
+        border-width: 0 0 0 math.div($spinner-size, 2);
     }
     50% {
         transform: rotate(0.625turn);
