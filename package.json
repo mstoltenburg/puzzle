@@ -40,7 +40,7 @@
     "file-loader": "^6.2.0",
     "font-awesome": "^4.7.0",
     "html-webpack-plugin": "^5.3.1",
-    "immutable": "^4.0.0-rc.12",
+    "immutable": "^4.3.8",
     "jest": "^27.0.4",
     "jest-junit": "^12.1.0",
     "mini-css-extract-plugin": "^1.6.0",
